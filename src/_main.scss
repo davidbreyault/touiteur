@@ -1,0 +1,9 @@
+@import "./variables.scss";
+
+* {
+    font-family: "Montserrat", sans-serif;
+}
+
+h1 {
+    color: map-get($text-colors, primary);
+}
