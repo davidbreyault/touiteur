@@ -1,0 +1,22 @@
+@import "../variables";
+@import "../mixins";
+
+header {
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  a {
+    display: block;
+    padding: 1rem;
+  }
+}
