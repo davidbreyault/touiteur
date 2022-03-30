@@ -8,12 +8,18 @@ $xxl: 87em; // Breakpoint 1400px
 // COLORS
 $text-colors: (
     primary: #242424,
-    primary-hover: #000000
+    primary-hover: #000000,
+    green-success: #078861,
+    red-error: #D60000
 );
 
 $background-colors: (
     primary: #FFFFFF,
-    gray-touit: #F7F7F7
+    gray-touit: #F7F7F7,
+    green-success-dark: #078861,
+    green-success-light: #F2FFFb,
+    red-error-dark: #D60000,
+    red-error-light: #FFF2F2
 );
 
 

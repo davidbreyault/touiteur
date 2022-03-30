@@ -1,1 +1,49 @@
-<p>authentication works!</p>
+<div class="form-container">
+
+  <ng-container *ngIf="userAuthenticationError">
+    <div class="alert alert__error alert__authentication">
+      <p>{{ userAuthenticationError }}</p>
+    </div>
+  </ng-container>
+
+  <form [formGroup]="authenticationForm" (ngSubmit)="onLogin()">
+    <!-- USERNAME -->
+    <mat-form-field appearance="fill">
+      <mat-label>Pseudonyme</mat-label>
+      <input matInput formControlName="username">
+      <mat-error *ngIf="authenticationForm.get('username')?.hasError('required')">
+        Username is <strong>required</strong>
+      </mat-error>
+      <mat-error *ngIf="authenticationForm.get('username')?.invalid && !authenticationForm.get('username')?.hasError('required')">
+        Username must have at least <strong>3</strong> characters
+      </mat-error>
+    </mat-form-field>
+    <!-- PASSWORD -->
+    <mat-form-field appearance="fill">
+      <mat-label>Mot de passe</mat-label>
+      <input matInput [type]="hidePasswordCharacters ? 'password' : 'text'" formControlName="password">
+      <button mat-icon-button 
+              matSuffix 
+              (click)="hidePasswordCharacters = !hidePasswordCharacters" 
+              [attr.aria-label]="'Hide password'" 
+              [attr.aria-pressed]="hidePasswordCharacters">
+        <mat-icon>{{ hidePasswordCharacters ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
+      <mat-error *ngIf="authenticationForm.get('password')?.hasError('required')">
+        Password is <strong>required</strong>
+      </mat-error>
+      <mat-error *ngIf="authenticationForm.get('password')?.invalid && !authenticationForm.get('password')?.hasError('required')">
+        Password must have at least <strong>8</strong> characters
+      </mat-error>
+    </mat-form-field>
+    <!-- SUBMIT BUTTON -->
+    <div class="submit-container">
+      <button mat-raised-button color="primary">Connexion</button>
+    </div>
+  </form>
+
+  <div class="registry-login-link">
+    <p>Pas de compte ? <a routerLink="/registration">S'enregistrer</a></p>
+  </div>
+  
+</div>

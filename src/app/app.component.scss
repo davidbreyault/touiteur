@@ -13,10 +13,13 @@ header {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    button {
+      margin-left: 1rem;
+    }
   }
 
   a {
     display: block;
-    padding: 1rem;
+    padding: 2rem 1rem;
   }
 }

@@ -1,7 +1,5 @@
 export class Authentication {
-  constructor(
-    public isAuthenticated: boolean,
-    public bearerToken?: string,
-    public username?: string
-  ) {}
+  isAuthenticated!: boolean;
+  bearerToken?: string;
+  username?: string;
 }
