@@ -1,0 +1,75 @@
+<div class="form-container">
+  
+  <ng-container *ngIf="userRegistrationSuccess">
+    <div class="alert alert__success alert__registration">
+      <p>{{ userRegistrationSuccess }}</p>
+      <a routerLink="/login">Se connecter</a>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="userRegistrationError">
+    <div class="alert alert__error alert__registration">
+      <p>{{ userRegistrationError }}</p>
+    </div>
+  </ng-container>
+
+  <form [formGroup]="registrationForm" (ngSubmit)="onRegister()">
+    <!-- USERNAME -->
+    <mat-form-field appearance="fill">
+      <mat-label>Pseudonyme</mat-label>
+      <input matInput formControlName="username">
+
+      <mat-error *ngIf="registrationForm.get('username')?.hasError('required')">
+        Username is <strong>required</strong>
+      </mat-error>
+      <mat-error
+        *ngIf="registrationForm.get('username')?.invalid && !registrationForm.get('username')?.hasError('required')">
+        Username must have at least <strong>3</strong> characters
+      </mat-error>
+    </mat-form-field>
+
+    <!-- PASSWORD -->
+    <mat-form-field appearance="fill">
+      <mat-label>Mot de passe</mat-label>
+      <input matInput [type]="hidePasswordCharacters ? 'password' : 'text'" formControlName="password">
+      <button mat-icon-button matSuffix (click)="hidePasswordCharacters = !hidePasswordCharacters"
+        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePasswordCharacters">
+        <mat-icon>{{ hidePasswordCharacters ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
+
+      <mat-error *ngIf="registrationForm.get('password')?.hasError('required')">
+        Password is <strong>required</strong>
+      </mat-error>
+      <mat-error *ngIf="registrationForm.get('password')?.hasError('minlength')">
+        Password must be at least <strong>8</strong> characters
+      </mat-error>
+    </mat-form-field>
+
+    <!-- CONFIRMATION -->
+    <mat-form-field appearance="fill">
+      <mat-label>Confirmation</mat-label>
+      <input matInput [type]="hideConfimationCharaters ? 'password' : 'text'" formControlName="confirmation">
+      <button mat-icon-button matSuffix (click)="hideConfimationCharaters = !hideConfimationCharaters"
+        [attr.aria-label]="'Hide confirmation'" [attr.aria-pressed]="hideConfimationCharaters">
+        <mat-icon>{{ hideConfimationCharaters ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
+
+      <mat-error *ngIf="registrationForm.get('confirmation')?.hasError('required')">
+        Confirmation is <strong>required</strong>
+      </mat-error>
+      <mat-error
+        *ngIf="registrationForm.hasError('notSame') && !registrationForm.get('confirmation')?.hasError('required')">
+        Password <strong>and</strong> confirmation must be the same
+      </mat-error>
+
+    </mat-form-field>
+
+    <!-- SUBMIT BUTTON -->
+    <div class="submit-container">
+      <button mat-raised-button color="primary">S'inscrire</button>
+    </div>
+  </form>
+
+  <div class="registry-login-link">
+    <p>Déjà un compte ? <a routerLink="/login">Se connecter</a></p>
+  </div>
+</div>

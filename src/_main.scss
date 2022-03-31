@@ -1,9 +1,85 @@
 @import "./variables.scss";
+@import "./mixins.scss";
 
 * {
-    font-family: "Montserrat", sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 h1 {
-    color: map-get($text-colors, primary);
+  color: map-get($text-colors, primary);
+  font-weight: 200;
+}
+
+a, p, div, button[mat-raised-button] {
+  font-size: 1.2rem;
+  @include sm { font-size: 1.4rem; }
+  @include xl { font-size: 1.6rem; }
+}
+
+mat-form-field {
+  display: block !important;
+  margin-bottom: 0.6rem;
+}
+
+.container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  @include lg {
+    max-width: calc(62em - 3rem);
+  }
+  @include xl {
+    max-width: calc(75em - 3rem);
+  }
+  @include xxl {
+    max-width: calc(87.5em - 3rem);
+  }
+}
+
+.form-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  form {
+    width: 100%;
+    @include sm { width: 50%; }
+    @include lg { width: 35%; }
+    @include xl { width: 25%; }
+  }
+  .submit-container {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+.mat-error {
+  font-size: 0.8rem;
+  @include sm { font-size: 1rem; }
+}
+
+.registry-login-link {
+  position: absolute;
+  bottom: 4rem;
+}
+
+.alert {
+  width: 100%;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  &__authentication, &__registration {
+    margin-bottom: 4rem;
+  }
+  &__success {
+    color: map-get($text-colors, green-success);
+    background-color: map-get($background-colors, green-success-light);
+  }
+  &__error {
+    color: map-get($text-colors, red-error);
+    background-color: map-get($background-colors, red-error-light);
+  }
 }

@@ -1,0 +1,13 @@
+@import "../../mixins.scss";
+
+.alert__registration {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  @include sm {
+    flex-direction: row;
+    justify-content: space-between; 
+    align-items: center;
+  }
+}
