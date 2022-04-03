@@ -1,1 +1,7 @@
 <p>touits-list works!</p>
+
+<ng-container *ngIf="wheel">
+  <div class="spinner-container">
+    <mat-spinner [diameter]="60" [strokeWidth]="2.5"></mat-spinner>
+  </div>
+</ng-container>

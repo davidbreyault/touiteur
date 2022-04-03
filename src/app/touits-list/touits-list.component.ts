@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Touit } from '../models/Touit.model';
+import { TouitsService } from '../services/touits.service';
 
 @Component({
   selector: 'app-touits-list',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TouitsListComponent implements OnInit {
 
-  constructor() { }
+  wheel!: boolean;
+  touitsList!: Touit[];
+
+  constructor(private touitsService: TouitsService) { }
 
   ngOnInit(): void {
+    this.wheel = true;
+    // this.touitsService.getAllTouits()
+    //   .subscribe({
+    //     next: response => {
+    //       console.log(response)
+    //       this.touitsList = response.messages
+    //     },
+    //     complete: () => this.wheel = false
+    //   })
   }
-
 }

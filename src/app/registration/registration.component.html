@@ -3,7 +3,7 @@
   <ng-container *ngIf="userRegistrationSuccess">
     <div class="alert alert__success alert__registration">
       <p>{{ userRegistrationSuccess }}</p>
-      <a routerLink="/login">Se connecter</a>
+      <a routerLink="/login" mat-button color="primary">Se connecter</a>
     </div>
   </ng-container>
   <ng-container *ngIf="userRegistrationError">
@@ -70,6 +70,6 @@
   </form>
 
   <div class="registry-login-link">
-    <p>Déjà un compte ? <a routerLink="/login">Se connecter</a></p>
+    <p>Déjà un compte ? <a routerLink="/login" mat-button color="primary">Se connecter</a></p>
   </div>
 </div>
