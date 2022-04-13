@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Touit } from '../models/Touit.model';
 import { TouitsService } from '../services/touits.service';
 
@@ -11,18 +11,22 @@ export class TouitsListComponent implements OnInit {
 
   wheel!: boolean;
   touitsList!: Touit[];
+  touitsError!: string;
 
   constructor(private touitsService: TouitsService) { }
 
   ngOnInit(): void {
     this.wheel = true;
-    // this.touitsService.getAllTouits()
-    //   .subscribe({
-    //     next: response => {
-    //       console.log(response)
-    //       this.touitsList = response.messages
-    //     },
-    //     complete: () => this.wheel = false
-    //   })
+    this.touitsService.getAllTouits()
+      .subscribe({
+        next: response => {
+          this.touitsList = response.messages.reverse();
+        },
+        error: response => {
+          this.wheel = false;
+          this.touitsError = response.status + " " + response.statusText + ". Une erreur est survenue.";
+        },
+        complete: () => this.wheel = false
+      })
   }
 }

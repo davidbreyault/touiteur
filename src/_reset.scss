@@ -38,12 +38,14 @@ dd {
 
 /* Remove default padding */
 ul[class],
+li[class],
 ol[class] {
   padding: 0;
 }
 
 /* Remove list styles on ul, ol elements with a class attribute */
 ul[class],
+li[class],
 ol[class] {
   list-style: none;
 }

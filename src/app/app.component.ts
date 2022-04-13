@@ -11,7 +11,7 @@ import { TokenService } from './services/token.service';
 })
 export class AppComponent implements OnInit{
 
-  appTitle: string = "touiteur";
+  appTitle: string = "Touiteur";
   authenticationData!: Authentication;
   screenWidth: number = window.innerWidth;
   isMenuOpen: boolean = false;

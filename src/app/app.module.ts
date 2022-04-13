@@ -20,6 +20,7 @@ import { MockRegistrationService } from './mocks/mock-registration.service';
 import { AuthenticationLauncherService } from './services/authentication-launcher.service';
 import { MockAuthenticationLauncherService } from './mocks/mock-authentication-launcher.service';
 import { TouitsService } from './services/touits.service';
+import { MockTouitService } from './mocks/mock-touit.service';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { TouitsService } from './services/touits.service';
     //AuthenticationLauncherService,
     { provide: AuthenticationLauncherService, useClass: MockAuthenticationLauncherService },
     TouitsService
+    //{ provide: TouitsService, useClass: MockTouitService}
   ],
   bootstrap: [AppComponent]
 })

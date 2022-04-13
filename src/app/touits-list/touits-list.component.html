@@ -1,7 +1,18 @@
-<p>touits-list works!</p>
+<h2>Tous les Touits</h2>
 
 <ng-container *ngIf="wheel">
   <div class="spinner-container">
     <mat-spinner [diameter]="60" [strokeWidth]="2.5"></mat-spinner>
   </div>
 </ng-container>
+
+<ng-container *ngIf="touitsError">
+  <p class="alert alert__error">{{ touitsError }}</p>
+</ng-container>
+
+<ng-container *ngIf="touitsList">
+  <ul class="touits-container">
+    <app-touit *ngFor="let t of touitsList" [touit]="t"></app-touit>
+  </ul>
+</ng-container>
+

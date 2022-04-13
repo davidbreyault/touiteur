@@ -3,7 +3,7 @@
 
 * { font-family: "Montserrat", sans-serif; }
 
-header { 
+header, main { 
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
@@ -11,6 +11,16 @@ header {
 h1 {
   color: map-get($text-colors, title-1);
   font-weight: 500;
+}
+
+h2 {
+  font-weight: 400;
+}
+
+h3 {
+  font-size: 1.4rem;
+  @include sm { font-size: 1.4rem; }
+  @include xl { font-size: 1.6rem; }
 }
 
 a, p, div, button[mat-raised-button] {
