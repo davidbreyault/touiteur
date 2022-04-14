@@ -1,6 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { Authentication } from './models/Authentication.model';
 import { AuthenticationService } from './services/authentication.service';
 import { TokenService } from './services/token.service';
@@ -10,20 +9,32 @@ import { TokenService } from './services/token.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnInit{
 
-  appTitle: string = "touiteur";
+  appTitle: string = "Touiteur";
   authenticationData!: Authentication;
-  subscription!: Subscription;
+  screenWidth: number = window.innerWidth;
+  onLoginRoute!: boolean;
+  onRegistrationRoute!: boolean;
+  isMenuOpen: boolean = false;
+  
 
   constructor(private authenticationService: AuthenticationService, private tokenService: TokenService, private router: Router) {}
 
   ngOnInit(): void {
-    this.subscription =
-      this.authenticationService.getAuthenticationDataAsObservable()
-        .subscribe({
-          next: (authData: Authentication) => this.authenticationData = authData
-        })
+    this.router.events
+      .subscribe({
+        next: value => {
+          if (value instanceof NavigationEnd) {
+            this.onLoginRoute = this.router.url === "/login" ? true : false;
+            this.onRegistrationRoute = this.router.url === "/registration" ? true : false;
+          }
+        }
+      })
+    this.authenticationService.getAuthenticationDataAsObservable()
+      .subscribe({
+        next: (authData: Authentication) => this.authenticationData = authData
+      })
     // S'il y a un token dans le session storage et qu'il est encore valide
     if (sessionStorage.getItem("token")) {
       if (this.tokenService.checkTokenValidity()) {
@@ -32,14 +43,21 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   }
 
-  logout(): void {
-    this.authenticationService.logout();
-    this.router.navigateByUrl("/login");
+  @HostListener("window: resize", ["$event"])
+  onWindowResize(): void {
+    this.screenWidth = window.innerWidth;
+    if (window.innerWidth >= 1200) {
+      this.isMenuOpen = false;
+    }
   }
 
-  ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
+  onClickMenuButton(): void {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  logout(): void {
+    this.isMenuOpen = false;
+    this.authenticationService.logout();
+    this.router.navigateByUrl("/login");
   }
 }

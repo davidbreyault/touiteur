@@ -1,0 +1,24 @@
+<li class="touit">
+  <!-- touit header -->
+  <div class="touit__header">
+    <h3 class="touit__header--name">
+      by <span class="touit__header--name---span">{{ touit.name }}</span>
+      <span *ngIf="touit.is_user_authenticated" class="material-icons">verified</span>
+    </h3>
+    <p class="touit__header--ts">{{ touit.ts | date: 'dd/MM/yy - HH:ss' }}</p>
+  </div>
+  <!--touit body -->
+  <article class="touit__body">{{ touit.message }}</article>
+  <!-- touit footer -->
+  <div class="touit__footer">
+    <div class="touit__footer--likes">
+      <span>{{ touit.likes }}</span>
+      <button><span class="material-icons">thumb_up_alt</span></button>
+      <button><span class="material-icons">thumb_down_alt</span></button>
+    </div>
+    <div class="touit__footer--comments">
+      <span>{{ touit.comments_count }}</span>
+      <button><span class="material-icons">textsms</span></button>
+    </div>
+  </div>
+</li>

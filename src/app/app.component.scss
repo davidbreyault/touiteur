@@ -1,25 +1,114 @@
 @import "../variables";
 @import "../mixins";
 
-header {
-  .container {
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__links {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    background-color: map-get($background-colors, primary);
+    transform: scale(0);
+    @include xl {
+      position: relative;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      width: max-content;
+      background-color: transparent;
+      transform: scale(1) !important;
+      button {
+        margin-left: 1rem;
+      }
+    }
   }
 
-  .navbar {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    button {
-      margin-left: 1rem;
+  &__button {
+    position: relative;
+    z-index: 2;
+    padding: 0;
+    width: 3.6rem;
+    height: 2.7rem;
+    border: solid 1px transparent;
+    background-color: transparent;
+    &:focus {
+      outline-style: dotted;
+      outline-width: 1px;
+      outline-offset: 8px;
+      outline-color: map-get($background-colors, secondary);
+    }
+    span {
+      position: absolute;
+      display: block;
+      width: 100%;
+      height: $bar-width;
+      border-radius: $bar-width / 2;
+      background-color: map-get($background-colors, secondary);
+      opacity: 1;
+      transition: $transition;
+    }
+    span:nth-child(1) {
+      top: 0;
+      transform-origin: left center;
+    }
+    span:nth-child(2) {
+      top: calc((2.7rem / 2) - ($bar-width / 2));
+      transform-origin: left center;
+    }
+    span:nth-child(3) {
+      top: calc(2.7rem - $bar-width);
+      transform-origin: left center;
+    }
+  }
+
+  &__button.crossed {
+    span:nth-child(1) {
+      top: -0.05rem;
+      left: 0.5rem;
+      transform: rotate(45deg);
+    }
+    span:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+    span:nth-child(3) {
+      top: 2.35rem;
+      left: 0.5rem;
+      transform: rotate(-45deg);
     }
   }
 
   a {
     display: block;
-    padding: 2rem 1rem;
+    margin-bottom: 1rem;
+    padding-left: 1.6rem;
+    padding-right: 1.6rem;
+    line-height: 3.675rem;
+    color: map-get($text-colors, header-link-text);
+    border-radius: map-get($radius, default);
+    font-weight: 500;
+    text-decoration: none;
+    transition: $transition;
+    &:hover {
+      color: map-get($text-colors, white);
+      background-color: map-get($background-colors, secondary);
+      box-shadow: $shadows;
+    }
+    @include xl {
+      margin-top: 0;
+      margin-bottom: 0;
+      margin-left: 1rem;
+      margin-right: 1rem;
+    }
   }
 }

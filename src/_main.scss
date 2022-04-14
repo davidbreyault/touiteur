@@ -1,13 +1,39 @@
 @import "./variables.scss";
 @import "./mixins.scss";
 
-* {
-  font-family: "Montserrat", sans-serif;
+* { font-family: "Montserrat", sans-serif; }
+
+header {
+  position: fixed;
+  z-index: 1;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  width: 100%;
+  background-color: map-get($background-colors, primary);
+  box-shadow: 0px 5px 20px 20px map-get($background-colors, primary);
+}
+
+main {
+  padding-top: 11rem;
+  &.main-login-route,
+  &.main-registration-route {
+    padding-top: 0;
+  }
 }
 
 h1 {
-  color: map-get($text-colors, primary);
-  font-weight: 200;
+  color: map-get($text-colors, title-1);
+  font-weight: 500;
+}
+
+h2 {
+  font-weight: 400;
+}
+
+h3 {
+  font-size: 1.4rem;
+  @include sm { font-size: 1.4rem; }
+  @include xl { font-size: 1.6rem; }
 }
 
 a, p, div, button[mat-raised-button] {
@@ -27,15 +53,9 @@ mat-form-field {
   margin-right: auto;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
-  @include lg {
-    max-width: calc(62em - 3rem);
-  }
-  @include xl {
-    max-width: calc(75em - 3rem);
-  }
-  @include xxl {
-    max-width: calc(87.5em - 3rem);
-  }
+  @include lg { max-width: calc(62em - 3rem); }
+  @include xl { max-width: calc(75em - 3rem); }
+  @include xxl { max-width: calc(87.5em - 3rem); }
 }
 
 .form-container {
@@ -65,15 +85,14 @@ mat-form-field {
 .registry-login-link {
   position: absolute;
   bottom: 4rem;
+  a { margin-left: 1rem; }
 }
 
 .alert {
   width: 100%;
   padding: 1.5rem;
   border-radius: 0.5rem;
-  &__authentication, &__registration {
-    margin-bottom: 4rem;
-  }
+  &__authentication, &__registration { margin-bottom: 4rem; }
   &__success {
     color: map-get($text-colors, green-success);
     background-color: map-get($background-colors, green-success-light);

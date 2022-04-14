@@ -1,0 +1,73 @@
+@import "../../variables.scss";
+@import "../../mixins.scss";
+
+* { font-weight: 200; }
+
+.touit {
+  &__header {
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid map-get($border-colors, default);
+    &--name {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      &---span {
+        margin: 0 0.3rem;
+        font-weight: 400;
+      }
+      .material-icons {
+        color: map-get($background-colors, secondary);
+      }
+    }
+    &--ts {
+      font-size: 1rem;
+      font-style: italic;
+    }
+  }
+  &__body { 
+    overflow-wrap: break-word !important;
+  }
+  &__footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 1rem;
+    & > div {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-left: 0.8rem;
+      & > span {
+        margin-right: 0.3rem;
+        font-weight: 400;
+      }
+    }
+    button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
+      background-color: transparent;
+      border: none;
+      span {
+        color: map-get($text-colors, gray-1);
+        transition: $transition;
+        &:hover {
+          color: map-get($text-colors, gray-1-hover);
+        }
+      }
+    }
+  }
+
+  padding: 1rem;
+  border-radius: map-get($radius, large);
+  background-color: map-get($background-colors, tertiary);
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.15);
+  @include sm { padding: 1.5rem; }
+  @include xl { 
+    min-width: 22rem; 
+    max-width: calc($xl - (2 * 1.5rem));
+  }
+  @include xxl { max-width: calc($xxl - (2 * 1.5rem)); }
+}
