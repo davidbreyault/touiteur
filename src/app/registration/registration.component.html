@@ -56,16 +56,20 @@
       <mat-error *ngIf="registrationForm.get('confirmation')?.hasError('required')">
         Confirmation is <strong>required</strong>
       </mat-error>
+      <!-- <mat-error
+        *ngIf="registrationForm.get('confirmation')?.hasError('notSame')">
+        Password <strong>and</strong> confirmation <strong>must</strong> be the same
+      </mat-error> -->
       <mat-error
-        *ngIf="registrationForm.hasError('notSame') && !registrationForm.get('confirmation')?.hasError('required')">
-        Password <strong>and</strong> confirmation must be the same
+        *ngIf="customValidators.formFieldHasError($any(registrationForm?.get('confirmation')), 'notSame')">
+        Password <strong>and</strong> confirmation <strong>must</strong> be the same
       </mat-error>
 
     </mat-form-field>
 
     <!-- SUBMIT BUTTON -->
     <div class="submit-container">
-      <button mat-raised-button color="primary">S'inscrire</button>
+      <button mat-raised-button color="primary" [disabled]="!isRegistrationFormValid()">S'inscrire</button>
     </div>
   </form>
 

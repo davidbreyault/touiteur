@@ -4,7 +4,9 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { User } from '../models/User.model';
 import { UserRegister } from '../models/UserRegister.model';
+import { AuthenticationService } from '../services/authentication.service';
 import { RegistrationService } from '../services/registration.service';
+import { CustomValidators } from '../shared/custom-validators';
 
 @Component({
   selector: 'app-registration',
@@ -19,10 +21,18 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   userRegistrationSuccess!: string | null;
   userRegistrationError!: string | null;
   subscription!: Subscription;
+  customValidators = CustomValidators;
 
-  constructor(private formBuilder: FormBuilder, private registrationService: RegistrationService, private router: Router) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private authenticationService: AuthenticationService, 
+    private registrationService: RegistrationService, 
+    private router: Router) { }
 
   ngOnInit(): void {
+    if (this.authenticationService.getAuthenticationData().isAuthenticated) {
+      this.router.navigateByUrl("/");
+    }
     this.createRegistrationForm();
   }
 
@@ -40,14 +50,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
         null,
         [Validators.required, Validators.minLength(8)]
       ]
-    }, { validators: this.passwordMatchValidator });
-  }
-
-  passwordMatchValidator(fg: FormGroup) {
-    const password = fg.controls["password"].value;
-    const confirm = fg.controls["confirmation"].value;
-    //console.log(password + " et " + confirm )
-    return password === confirm ? null : { notSame: true };
+    }, { validators: CustomValidators.passwordConfirmationValidator });
   }
 
   onRegister() {
@@ -78,6 +81,10 @@ export class RegistrationComponent implements OnInit, OnDestroy {
           }
         })
     }
+  }
+
+  isRegistrationFormValid(): boolean {
+    return this.registrationForm?.valid;
   }
 
   ngOnDestroy(): void {

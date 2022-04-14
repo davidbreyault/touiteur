@@ -40,8 +40,8 @@ import { MockTouitService } from './mocks/mock-touit.service';
   providers: [
     AuthGuard,
     TokenService,
-    //RegistrationService,
-    { provide: RegistrationService, useClass: MockRegistrationService },
+    RegistrationService,
+    //{ provide: RegistrationService, useClass: MockRegistrationService },
     AuthenticationService,
     //AuthenticationLauncherService,
     { provide: AuthenticationLauncherService, useClass: MockAuthenticationLauncherService },

@@ -1,5 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { Authentication } from './models/Authentication.model';
 import { AuthenticationService } from './services/authentication.service';
 import { TokenService } from './services/token.service';
@@ -14,11 +14,23 @@ export class AppComponent implements OnInit{
   appTitle: string = "Touiteur";
   authenticationData!: Authentication;
   screenWidth: number = window.innerWidth;
+  onLoginRoute!: boolean;
+  onRegistrationRoute!: boolean;
   isMenuOpen: boolean = false;
+  
 
   constructor(private authenticationService: AuthenticationService, private tokenService: TokenService, private router: Router) {}
 
   ngOnInit(): void {
+    this.router.events
+      .subscribe({
+        next: value => {
+          if (value instanceof NavigationEnd) {
+            this.onLoginRoute = this.router.url === "/login" ? true : false;
+            this.onRegistrationRoute = this.router.url === "/registration" ? true : false;
+          }
+        }
+      })
     this.authenticationService.getAuthenticationDataAsObservable()
       .subscribe({
         next: (authData: Authentication) => this.authenticationData = authData
@@ -44,6 +56,7 @@ export class AppComponent implements OnInit{
   }
 
   logout(): void {
+    this.isMenuOpen = false;
     this.authenticationService.logout();
     this.router.navigateByUrl("/login");
   }

@@ -27,7 +27,7 @@
   </div>
 </header>
 
-<main>
+<main [ngClass]="{'main-login-route': onLoginRoute, 'main-registration-route': onRegistrationRoute}">
   <div class="container">
     <router-outlet></router-outlet>
   </div>
