@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app.routing.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { RegistrationModule } from './registration/registration.module';
@@ -21,6 +21,7 @@ import { AuthenticationLauncherService } from './services/authentication-launche
 import { MockAuthenticationLauncherService } from './mocks/mock-authentication-launcher.service';
 import { TouitsService } from './services/touits.service';
 import { MockTouitService } from './mocks/mock-touit.service';
+import { InterceptorService } from './services/interceptor.service';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,11 @@ import { MockTouitService } from './mocks/mock-touit.service';
     AppRoutingModule
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi: true
+    },
     AuthGuard,
     TokenService,
     RegistrationService,

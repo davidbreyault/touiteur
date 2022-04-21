@@ -1,18 +1,23 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Touit } from '../models/Touit.model';
+import { TouitsService } from '../services/touits.service';
 
 @Component({
   selector: 'app-touit',
   templateUrl: './touit.component.html',
   styleUrls: ['./touit.component.scss']
 })
-export class TouitComponent implements OnInit {
+export class TouitComponent {
 
   @Input() touit!: Touit;
 
-  constructor() { }
+  constructor(private touitService: TouitsService) { }
 
-  ngOnInit(): void {
+  like(id: number): void {
+    this.touitService.likeTouit(id).subscribe(() => this.touit.likes++);
   }
 
+  dislike(id: number): void {
+    this.touitService.dislikeTouit(id).subscribe(() => this.touit.likes--);
+  }
 }
