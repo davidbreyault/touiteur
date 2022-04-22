@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { Observable, Subject, tap } from "rxjs";
-import { Authentication } from "../models/Authentication.model";
-import { User } from "../models/User.model";
-import { UserLogin } from "../models/UserLogin.model";
+import { Authentication } from "../_models/Authentication.model";
+import { User } from "../_models/User.model";
+import { UserLogin } from "../_models/UserLogin.model";
 import { AuthenticationLauncherService } from "./authentication-launcher.service";
 import { TokenService } from "./token.service";
 

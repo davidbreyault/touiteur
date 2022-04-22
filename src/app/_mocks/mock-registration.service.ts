@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, of, throwError } from "rxjs";
-import { UserRegister } from "../models/UserRegister.model";
+import { UserRegister } from "../_models/UserRegister.model";
 
 @Injectable()
 export class MockRegistrationService {

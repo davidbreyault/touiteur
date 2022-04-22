@@ -2,9 +2,9 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { api } from "src/environments/environment";
-import { TouitDisliked } from "../models/TouitDisliked.model";
-import { TouitLiked } from "../models/TouitLiked.model";
-import { TouitsList } from "../models/TouitsList.model";
+import { TouitDisliked } from "../_models/TouitDisliked.model";
+import { TouitLiked } from "../_models/TouitLiked.model";
+import { TouitsList } from "../_models/TouitsList.model";
 
 @Injectable()
 export class TouitsService {

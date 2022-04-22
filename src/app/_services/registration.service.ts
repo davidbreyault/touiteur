@@ -2,8 +2,8 @@ import { HttpClient, HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { api } from "src/environments/environment";
-import { User } from "../models/User.model";
-import { UserRegister } from "../models/UserRegister.model";
+import { User } from "../_models/User.model";
+import { UserRegister } from "../_models/UserRegister.model";
 
 @Injectable()
 export class RegistrationService {

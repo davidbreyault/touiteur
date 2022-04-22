@@ -1,8 +1,8 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { Authentication } from './models/Authentication.model';
-import { AuthenticationService } from './services/authentication.service';
-import { TokenService } from './services/token.service';
+import { AuthenticationService } from './_services/authentication.service';
+import { TokenService } from './_services/token.service';
+import { Authentication } from './_models/Authentication.model';
 
 @Component({
   selector: 'app-root',

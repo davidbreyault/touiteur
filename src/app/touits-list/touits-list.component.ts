@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Touit } from '../models/Touit.model';
-import { TouitsService } from '../services/touits.service';
+import { TouitsService } from '../_services/touits.service';
+import { Touit } from '../_models/Touit.model';
 
 @Component({
   selector: 'app-touits-list',

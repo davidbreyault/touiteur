@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, of, throwError } from "rxjs";
-import { TouitsList } from "../models/TouitsList.model";
+import { TouitsList } from "../_models/TouitsList.model";
 
 @Injectable()
 export class MockTouitService {

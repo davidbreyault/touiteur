@@ -2,8 +2,8 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { api } from "src/environments/environment";
-import { User } from "../models/User.model";
-import { UserLogin } from "../models/UserLogin.model";
+import { User } from "../_models/User.model";
+import { UserLogin } from "../_models/UserLogin.model";
 
 @Injectable()
 export class AuthenticationLauncherService {
