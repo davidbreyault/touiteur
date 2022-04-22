@@ -21,7 +21,7 @@ export class TouitsListComponent implements OnInit {
       .subscribe({
         next: response => {
           this.touitsList = response.messages.reverse();
-          //console.log(this.touitsList)
+          console.log(this.touitsList)
         },
         error: response => {
           this.wheel = false;

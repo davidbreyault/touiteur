@@ -37,21 +37,19 @@ export class AuthenticationService {
           this.authenticationData.bearerToken = response.access_token;
           this.authenticationData.username = this.tokenService.getUsernameFromJwt(response.access_token);
           // Stockage du token dans le session storage
-          sessionStorage.setItem("token", this.authenticationData.bearerToken);
+          this.tokenService.setToken(this.authenticationData.bearerToken);
           this.emitAuthenticationDataSubject();
         }
       }))
   }
 
   loginViaBearerToken(): void {
-    const bearerToken = sessionStorage.getItem("token")!;
+    const bearerToken = this.tokenService.getToken()!;
     this.authenticationData.isAuthenticated = true;
     this.authenticationData.bearerToken = bearerToken;
     this.authenticationData.username = this.tokenService.getUsernameFromJwt(bearerToken);
     this.emitAuthenticationDataSubject();
   }
-
-  
 
   logout(): void {
     this.authenticationData.isAuthenticated = false;

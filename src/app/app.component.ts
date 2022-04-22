@@ -18,8 +18,11 @@ export class AppComponent implements OnInit{
   onRegistrationRoute!: boolean;
   isMenuOpen: boolean = false;
   
-
-  constructor(private authenticationService: AuthenticationService, private tokenService: TokenService, private router: Router) {}
+  constructor(
+    private authenticationService: AuthenticationService, 
+    private tokenService: TokenService, 
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.router.events
@@ -36,7 +39,7 @@ export class AppComponent implements OnInit{
         next: (authData: Authentication) => this.authenticationData = authData
       })
     // S'il y a un token dans le session storage et qu'il est encore valide
-    if (sessionStorage.getItem("token")) {
+    if (this.tokenService.getToken()) {
       if (this.tokenService.checkTokenValidity()) {
         this.authenticationService.loginViaBearerToken();
       }

@@ -13,8 +13,8 @@
   <div class="touit__footer">
     <div class="touit__footer--likes">
       <span>{{ touit.likes }}</span>
-      <button (click)="like(touit.id)"><span class="material-icons">thumb_up_alt</span></button>
-      <button (click)="dislike(touit.id)"><span class="material-icons">thumb_down_alt</span></button>
+      <button (click)="onLike(touit.id)"><span class="material-icons">thumb_up_alt</span></button>
+      <button (click)="onDislike(touit.id)"><span class="material-icons">thumb_down_alt</span></button>
     </div>
     <div class="touit__footer--comments">
       <span>{{ touit.comments_count }}</span>

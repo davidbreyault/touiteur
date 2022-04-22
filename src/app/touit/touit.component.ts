@@ -13,11 +13,11 @@ export class TouitComponent {
 
   constructor(private touitService: TouitsService) { }
 
-  like(id: number): void {
+  onLike(id: number): void {
     this.touitService.likeTouit(id).subscribe(() => this.touit.likes++);
   }
 
-  dislike(id: number): void {
+  onDislike(id: number): void {
     this.touitService.dislikeTouit(id).subscribe(() => this.touit.likes--);
   }
 }

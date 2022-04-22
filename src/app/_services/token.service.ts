@@ -4,6 +4,14 @@ import { JwtPayload } from "../_models/JwtPayload.model";
 @Injectable()
 export class TokenService {
 
+  getToken(): string | null {
+    return sessionStorage.getItem("token");
+  }
+
+  setToken(token: string): void {
+    sessionStorage.setItem("token", token);
+  }
+
   getJwtPayload(token: string): JwtPayload {
     return JSON.parse(atob(token.split(".")[1]))
   }
