@@ -1,7 +1,7 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TouitsService } from '../_services/touits.service';
 import { Touit } from '../_models/Touit.model';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-touits-list',
