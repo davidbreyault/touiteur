@@ -66,7 +66,7 @@
   box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.15);
   @include sm { padding: 1.5rem; }
   @include xl { 
-    min-width: 22rem; 
+    min-width: 28rem; 
     max-width: calc($xl - (2 * 1.5rem));
   }
   @include xxl { max-width: calc($xxl - (2 * 1.5rem)); }

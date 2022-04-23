@@ -51,7 +51,7 @@ import { InterceptorService } from './_services/interceptor.service';
     AuthenticationService,
     AuthenticationLauncherService,
     //{ provide: AuthenticationLauncherService, useClass: MockAuthenticationLauncherService },
-    TouitsService
+    TouitsService,
     //{ provide: TouitsService, useClass: MockTouitService}
   ],
   bootstrap: [AppComponent]

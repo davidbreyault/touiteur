@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { TouitsService } from '../_services/touits.service';
 import { Touit } from '../_models/Touit.model';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-touits-list',
@@ -11,6 +12,7 @@ export class TouitsListComponent implements OnInit {
 
   wheel!: boolean;
   touitsList!: Touit[];
+  touitsListSliced!: Touit[];
   touitsError!: string;
 
   constructor(private touitsService: TouitsService) { }
@@ -21,7 +23,7 @@ export class TouitsListComponent implements OnInit {
       .subscribe({
         next: response => {
           this.touitsList = response.messages.reverse();
-          console.log(this.touitsList)
+          this.touitsListSliced = this.touitsList.slice(0, 25);
         },
         error: response => {
           this.wheel = false;
@@ -29,5 +31,12 @@ export class TouitsListComponent implements OnInit {
         },
         complete: () => this.wheel = false
       })
+  }
+
+  onPageChange(event: PageEvent) {
+    //console.log(event);
+    let indexStart = event.pageIndex * event.pageSize;
+    let indexEnd = indexStart + event.pageSize;
+    this.touitsListSliced = this.touitsList.slice(indexStart, indexEnd);
   }
 }
