@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, of, throwError } from "rxjs";
-import { UserLogin } from "../models/UserLogin.model";
+import { UserLogin } from "../_models/UserLogin.model";
 
 @Injectable()
 export class MockAuthenticationLauncherService {

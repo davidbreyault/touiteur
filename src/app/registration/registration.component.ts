@@ -2,11 +2,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { User } from '../models/User.model';
-import { UserRegister } from '../models/UserRegister.model';
-import { AuthenticationService } from '../services/authentication.service';
-import { RegistrationService } from '../services/registration.service';
-import { CustomValidators } from '../shared/custom-validators';
+import { CustomValidators } from '../../shared/custom-validators';
+import { AuthenticationService } from '../_services/authentication.service';
+import { RegistrationService } from '../_services/registration.service';
+import { User } from '../_models/User.model';
+import { UserRegister } from '../_models/UserRegister.model';
 
 @Component({
   selector: 'app-registration',

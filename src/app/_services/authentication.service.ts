@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { Observable, Subject, tap } from "rxjs";
-import { Authentication } from "../models/Authentication.model";
-import { User } from "../models/User.model";
-import { UserLogin } from "../models/UserLogin.model";
+import { Authentication } from "../_models/Authentication.model";
+import { User } from "../_models/User.model";
+import { UserLogin } from "../_models/UserLogin.model";
 import { AuthenticationLauncherService } from "./authentication-launcher.service";
 import { TokenService } from "./token.service";
 
@@ -37,21 +37,19 @@ export class AuthenticationService {
           this.authenticationData.bearerToken = response.access_token;
           this.authenticationData.username = this.tokenService.getUsernameFromJwt(response.access_token);
           // Stockage du token dans le session storage
-          sessionStorage.setItem("token", this.authenticationData.bearerToken);
+          this.tokenService.setToken(this.authenticationData.bearerToken);
           this.emitAuthenticationDataSubject();
         }
       }))
   }
 
   loginViaBearerToken(): void {
-    const bearerToken = sessionStorage.getItem("token")!;
+    const bearerToken = this.tokenService.getToken()!;
     this.authenticationData.isAuthenticated = true;
     this.authenticationData.bearerToken = bearerToken;
     this.authenticationData.username = this.tokenService.getUsernameFromJwt(bearerToken);
     this.emitAuthenticationDataSubject();
   }
-
-  
 
   logout(): void {
     this.authenticationData.isAuthenticated = false;

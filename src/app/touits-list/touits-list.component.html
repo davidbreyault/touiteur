@@ -12,7 +12,12 @@
 
 <ng-container *ngIf="touitsList">
   <ul class="touits-container">
-    <app-touit *ngFor="let t of touitsList" [touit]="t"></app-touit>
+    <app-touit *ngFor="let t of touitsListSliced" [touit]="t"></app-touit>
   </ul>
+  <mat-paginator [length]="touitsList.length"
+                 [pageSize]="25"
+                 [pageSizeOptions]="[5, 10, 25, 100]"
+                 (page)="onPageChange($event)"
+                 aria-label="Select page">
+  </mat-paginator>
 </ng-container>
-
