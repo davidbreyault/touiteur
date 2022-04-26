@@ -1,0 +1,28 @@
+@import "../../variables.scss";
+@import "../../mixins.scss";
+
+.publication {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid map-get($border-colors, default);
+    button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
+      border: none;
+      background-color: transparent;
+    }
+  }
+}
+
+.form-container {
+  min-height: max-content;
+  form {
+    width: 100%;
+  }
+}

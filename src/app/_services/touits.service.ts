@@ -4,6 +4,7 @@ import { Observable } from "rxjs";
 import { api } from "src/environments/environment";
 import { TouitDisliked } from "../_models/TouitDisliked.model";
 import { TouitLiked } from "../_models/TouitLiked.model";
+import { TouitPost } from "../_models/TouitPost.model";
 import { TouitsList } from "../_models/TouitsList.model";
 
 @Injectable()
@@ -21,5 +22,9 @@ export class TouitsService {
 
   dislikeTouit(id :number): Observable<TouitDisliked> {
     return this.http.delete<TouitDisliked>((api.rootUrl + api.dislike), {body: "message_id=" + id});
+  }
+
+  postTouit(touitPost: TouitPost): Observable<any> {
+    return this.http.post((api.rootUrl + api.send), "name=" + touitPost.username + "&message=" + touitPost.message);
   }
 }

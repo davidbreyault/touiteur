@@ -99,6 +99,7 @@
     font-weight: 500;
     text-decoration: none;
     transition: $transition;
+    cursor: pointer;
     &:hover {
       color: map-get($text-colors, white);
       background-color: map-get($background-colors, secondary);
