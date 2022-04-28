@@ -53,7 +53,7 @@ import { TouitPublicationModule } from './touit-publication/touit-publication.mo
     AuthenticationLauncherService,
     //{ provide: AuthenticationLauncherService, useClass: MockAuthenticationLauncherService },
     TouitsService,
-    //{ provide: TouitsService, useClass: MockTouitService}
+    //{ provide: TouitsService, useClass: MockTouitService},
     {
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,

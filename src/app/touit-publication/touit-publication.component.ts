@@ -5,6 +5,10 @@ import { TouitPost } from '../_models/TouitPost.model';
 import { AuthenticationService } from '../_services/authentication.service';
 import { TouitsService } from '../_services/touits.service';
 
+export class transitedDataModel {
+  boolean!: boolean
+}
+
 @Component({
   selector: 'app-touit-publication',
   templateUrl: './touit-publication.component.html',
@@ -25,8 +29,9 @@ export class TouitPublicationComponent implements OnInit {
     this.createTouitPostForm();
   }
 
-  onCloseDialogTouitPost(): void {
-    this.matDialogRef.close();
+  onCloseDialogTouitPost(transitedData: transitedDataModel = {boolean: true}): void {
+    this.matDialogRef.close(transitedData);
+    console.log(transitedData)
   }
 
   createTouitPostForm() {

@@ -48,6 +48,8 @@ export class AppComponent implements OnInit{
     if (this.tokenService.getToken()) {
       if (this.tokenService.checkTokenValidity()) {
         this.authenticationService.loginViaBearerToken();
+      } else {
+        this.tokenService.deleteToken();
       }
     }
     this.setDialogWidth();
@@ -74,7 +76,9 @@ export class AppComponent implements OnInit{
     if (this.isMenuOpen) {
       this.isMenuOpen = false;
     }
-    //dialogRef.afterClosed().subscribe()
+    dialogRef.afterClosed().subscribe({
+      next: response => console.log(response)
+    })
   }
 
   setDialogWidth(): void {

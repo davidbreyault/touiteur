@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, of, throwError } from "rxjs";
-import { TouitDisliked } from "../_models/TouitDisliked.model";
+import { SuccessResponse } from "../_models/SuccessResponse.model";
 import { TouitLiked } from "../_models/TouitLiked.model";
 import { TouitsList } from "../_models/TouitsList.model";
 
@@ -59,7 +59,7 @@ export class MockTouitService {
     statusText: "Not Found"
   });
 
-  getDislikeTouitSuccessResponse(): TouitDisliked {
+  getSuccessResponse(): SuccessResponse {
     return { success: true };
   }
 
@@ -81,9 +81,9 @@ export class MockTouitService {
       : of(this.getLikeTouitSuccessResponse(id.toString()));
   }
 
-  dislikeTouit(): Observable<TouitDisliked>{
+  dislikeTouit(): Observable<SuccessResponse>{
     return this.dislikeTouitError
       ? throwError(() => this.dislikeTouitErrorResponse)
-      : of(this.getDislikeTouitSuccessResponse());
+      : of(this.getSuccessResponse());
   }
 }

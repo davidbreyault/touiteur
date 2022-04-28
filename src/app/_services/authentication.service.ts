@@ -52,6 +52,7 @@ export class AuthenticationService {
   }
 
   logout(): void {
+    this.tokenService.deleteToken();
     this.authenticationData.isAuthenticated = false;
     this.emitAuthenticationDataSubject();
   }
