@@ -11,6 +11,7 @@ import { TouitsList } from "../_models/TouitsList.model";
 export class TouitsService {
 
   private ts: number = 0;
+  isMockService: boolean = false;
 
   constructor(private http: HttpClient) {}
 

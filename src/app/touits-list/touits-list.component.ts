@@ -2,7 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TouitsService } from '../_services/touits.service';
 import { Touit } from '../_models/Touit.model';
 import { PageEvent } from '@angular/material/paginator';
-import { last } from 'rxjs';
+import { interval, Observable, Subscription } from 'rxjs';
+import { MatDialogRef } from '@angular/material/dialog';
+import { TouitPublicationComponent } from '../touit-publication/touit-publication.component';
 
 @Component({
   selector: 'app-touits-list',
@@ -18,17 +20,21 @@ export class TouitsListComponent implements OnInit, OnDestroy {
   pageSize: number = 25;
   indexStart: number = 0;
 
-  refreshInterval!: any;
+
+  subscription!: Subscription;
+  refreshInterval: Observable<number> = interval(1000);
 
   constructor(private touitsService: TouitsService) { }
 
   ngOnInit(): void {
     this.wheel = true;
-    this.refreshInterval = setInterval(() => {
-      if (this.indexStart === 0) {
-        this.getTouits();
-      }
-    }, 1000);
+    this.subscription = this.refreshInterval
+      .subscribe(() => {
+          if (this.indexStart === 0) {
+            this.getTouits();
+          }
+        }
+      )
   }
 
   getTouits():void {
@@ -36,12 +42,12 @@ export class TouitsListComponent implements OnInit, OnDestroy {
       .subscribe({
         next: response => {
           if (this.touitsService.getTs() === 0) {
-            console.log("TS A ZERO")
+            //console.log("TS A ZERO")
             this.touitsList = response.messages.reverse();
           } else {
-            console.log("TS SUPERIEUR A ZERO")
+            //console.log("TS SUPERIEUR A ZERO")
             const lastTouits = response.messages.filter(touit => touit.ts > this.touitsService.getTs());
-            if (lastTouits.length > 0) {
+            if (lastTouits.length > 0 && !this.touitsService.isMockService) {
               this.touitsList.unshift(...lastTouits);
             }
           }
@@ -65,7 +71,9 @@ export class TouitsListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    clearInterval(this.refreshInterval);
     this.touitsService.setTs(0);
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }

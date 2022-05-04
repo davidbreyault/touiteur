@@ -6,7 +6,7 @@ import { AuthenticationService } from '../_services/authentication.service';
 import { TouitsService } from '../_services/touits.service';
 
 export class transitedDataModel {
-  boolean!: boolean
+  touitPosted!: boolean;
 }
 
 @Component({
@@ -19,8 +19,8 @@ export class TouitPublicationComponent implements OnInit {
   touitPostForm!: FormGroup;
 
   constructor(
-    private formBuilder: FormBuilder, 
-    private authenticationService: AuthenticationService, 
+    private formBuilder: FormBuilder,
+    private authenticationService: AuthenticationService,
     private touitService: TouitsService,
     private matDialogRef: MatDialogRef<TouitPublicationComponent>
   ) { }
@@ -29,9 +29,8 @@ export class TouitPublicationComponent implements OnInit {
     this.createTouitPostForm();
   }
 
-  onCloseDialogTouitPost(transitedData: transitedDataModel = {boolean: true}): void {
+  onCloseDialogTouitPost(transitedData: transitedDataModel = {touitPosted: false}): void {
     this.matDialogRef.close(transitedData);
-    console.log(transitedData)
   }
 
   createTouitPostForm() {
@@ -45,6 +44,12 @@ export class TouitPublicationComponent implements OnInit {
     const touitPost = new TouitPost();
     touitPost.username = this.touitPostForm.value["username"];
     touitPost.message = this.touitPostForm.value["message"];
-    this.touitService.postTouit(touitPost).subscribe(() => this.onCloseDialogTouitPost());
+
+    if (this.touitPostForm.valid) {
+      console.log("VALID");
+      this.onCloseDialogTouitPost({touitPosted: true});
+      this.touitService.postTouit(touitPost).subscribe(() => this.onCloseDialogTouitPost({touitPosted: true}));
+      // Si erreur de type unauthorized, token périmé, déconnexion et redirection vers /login
+    }
   }
 }
