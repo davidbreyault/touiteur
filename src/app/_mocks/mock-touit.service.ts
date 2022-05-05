@@ -1,16 +1,22 @@
 import { HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, of, throwError } from "rxjs";
-import { TouitDisliked } from "../_models/TouitDisliked.model";
+import { SuccessResponse } from "../_models/SuccessResponse.model";
+import { Touit } from "../_models/Touit.model";
 import { TouitLiked } from "../_models/TouitLiked.model";
+import { TouitPost } from "../_models/TouitPost.model";
 import { TouitsList } from "../_models/TouitsList.model";
 
 @Injectable()
 export class MockTouitService {
 
+  isMockService: boolean = true;
   getAllTouitError: boolean = false;
   likeTouitError: boolean = false;
   dislikeTouitError: boolean = false;
+  postTouitError: boolean = false;
+
+  private ts: number = 0;
 
   touitsList: TouitsList = {
     messages: [
@@ -33,7 +39,15 @@ export class MockTouitService {
         ts: 1630932815695
       }
     ],
-    ts: 1649505369
+    ts: 1630932815695
+  }
+
+  getTs(): number {
+    return this.ts;
+  }
+
+  setTs(ts: number): void {
+    this.ts = ts;
   }
 
   getAllTouitsSuccessResponse(): TouitsList {
@@ -59,11 +73,17 @@ export class MockTouitService {
     statusText: "Not Found"
   });
 
-  getDislikeTouitSuccessResponse(): TouitDisliked {
+  getSuccessResponse(): SuccessResponse {
     return { success: true };
   }
 
   dislikeTouitErrorResponse: HttpErrorResponse = new HttpErrorResponse({
+    error: "Le serveur n'a pas trouvé la ressource demandée.",
+    status: 404,
+    statusText: "Not Found"
+  });
+
+  postTouitErrorResponse: HttpErrorResponse = new HttpErrorResponse({
     error: "Le serveur n'a pas trouvé la ressource demandée.",
     status: 404,
     statusText: "Not Found"
@@ -81,9 +101,28 @@ export class MockTouitService {
       : of(this.getLikeTouitSuccessResponse(id.toString()));
   }
 
-  dislikeTouit(): Observable<TouitDisliked>{
+  dislikeTouit(): Observable<SuccessResponse>{
     return this.dislikeTouitError
       ? throwError(() => this.dislikeTouitErrorResponse)
-      : of(this.getDislikeTouitSuccessResponse());
+      : of(this.getSuccessResponse());
+  }
+
+  postTouit(touitPost: TouitPost): Observable<SuccessResponse> {
+    if (!this.postTouitError) {
+      let touitPosted = new Touit();
+      touitPosted.comments_count = 0;
+      touitPosted.id = this.touitsList.messages.length;
+      touitPosted.is_user_authenticated = true;
+      touitPosted.likes = 0;
+      touitPosted.message = touitPost.message;
+      touitPosted.name = touitPost.username;
+      touitPosted.ts = new Date().getTime();
+      this.touitsList.ts = touitPosted.ts;
+      this.touitsList.messages.unshift(touitPosted);
+      return of(this.getSuccessResponse());
+    } 
+    else {
+      return throwError(() => this.postTouitErrorResponse);
+    }
   }
 }

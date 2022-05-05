@@ -12,6 +12,10 @@ export class TokenService {
     sessionStorage.setItem("token", token);
   }
 
+  deleteToken(): void {
+    sessionStorage.removeItem("token");
+  }
+
   getJwtPayload(token: string): JwtPayload {
     return JSON.parse(atob(token.split(".")[1]))
   }

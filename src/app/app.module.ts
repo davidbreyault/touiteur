@@ -8,6 +8,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { LayoutModule } from '@angular/cdk/layout'; 
 import { AuthenticationModule } from './authentication/authentication.module';
 import { RegistrationModule } from './registration/registration.module';
 import { TouitsListModule } from './touits-list/touits-list.module';
@@ -22,6 +24,7 @@ import { MockAuthenticationLauncherService } from './_mocks/mock-authentication-
 import { TouitsService } from './_services/touits.service';
 import { MockTouitService } from './_mocks/mock-touit.service';
 import { InterceptorService } from './_services/interceptor.service';
+import { TouitPublicationModule } from './touit-publication/touit-publication.module';
 
 @NgModule({
   declarations: [
@@ -32,18 +35,16 @@ import { InterceptorService } from './_services/interceptor.service';
     BrowserAnimationsModule,
     HttpClientModule,
     MatButtonModule,
+    MatDialogModule,
+    LayoutModule,
     AuthenticationModule,
     RegistrationModule,
     TouitsListModule,
+    TouitPublicationModule,
     // Module global de gestion de route (à importer en dernier !)
     AppRoutingModule
   ],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: InterceptorService,
-      multi: true
-    },
     AuthGuard,
     TokenService,
     RegistrationService,
@@ -52,7 +53,13 @@ import { InterceptorService } from './_services/interceptor.service';
     AuthenticationLauncherService,
     //{ provide: AuthenticationLauncherService, useClass: MockAuthenticationLauncherService },
     TouitsService,
-    //{ provide: TouitsService, useClass: MockTouitService}
+    //{ provide: TouitsService, useClass: MockTouitService},
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi: true,
+      deps: [AuthenticationService]
+    },
   ],
   bootstrap: [AppComponent]
 })

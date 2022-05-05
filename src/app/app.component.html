@@ -16,7 +16,7 @@
         class="navbar__links"
         [ngStyle]="{ 'transform': isMenuOpen ? 'scale(1)' : 'scale(0)'}"
         >
-        <li><a href="#">Touit</a></li>
+        <li><a (click)="onOpenDialog()">Touit</a></li>
         <li><a href="#">Tous les Touits</a></li>
         <li><a href="#">Les meilleurs Touits</a></li>
         <li><a href="#">Influenceurs</a></li>
