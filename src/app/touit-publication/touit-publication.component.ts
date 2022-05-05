@@ -7,6 +7,7 @@ import { TouitsService } from '../_services/touits.service';
 
 export class transitedDataModel {
   touitPosted!: boolean;
+  alertMessage?: string;
 }
 
 @Component({
@@ -47,9 +48,17 @@ export class TouitPublicationComponent implements OnInit {
 
     if (this.touitPostForm.valid) {
       console.log("VALID");
-      this.onCloseDialogTouitPost({touitPosted: true});
-      this.touitService.postTouit(touitPost).subscribe(() => this.onCloseDialogTouitPost({touitPosted: true}));
+      this.touitService.postTouit(touitPost)
+        .subscribe({
+          next: () => {
+            this.onCloseDialogTouitPost({touitPosted: true, alertMessage: "Votre Touit a été publié avec succès !"})
+          }
+        });
       // Si erreur de type unauthorized, token périmé, déconnexion et redirection vers /login
     }
+  }
+
+  isTouitPostFormValid(): boolean {
+    return this.touitPostForm?.valid;
   }
 }
