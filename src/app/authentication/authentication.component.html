@@ -1,10 +1,8 @@
 <div class="form-container">
 
-  <ng-container *ngIf="userAuthenticationError">
-    <div class="alert alert__error alert__authentication">
-      <p>{{ userAuthenticationError }}</p>
-    </div>
-  </ng-container>
+  <div class="alert-container">
+    <app-alert></app-alert>
+  </div>
 
   <form [formGroup]="authenticationForm" (ngSubmit)="onLogin()">
     <!-- USERNAME -->

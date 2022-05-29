@@ -12,24 +12,24 @@ $text-colors: (
     title-1: #1E88E5,
     gray-1: #5C5C5C,
     gray-1-hover: #000000,
-    green-success: #078861,
-    red-error: #D60000,
     header-link-text: #1E88E5,
-    white: #FFFFFF
+    white: #FFFFFF,
+    success: #00B490,
+    error: #F44336
 );
 
 $background-colors: (
     primary: #FFFFFF,
     secondary: #1E88E5,
     tertiary: #F4F4F4,
-    green-success-dark: #078861,
-    green-success-light: #F2FFFb,
-    red-error-dark: #D60000,
-    red-error-light: #FFF2F2,
+    success: #EDFFF9,
+    error: #FFF6F6
 );
 
 $border-colors: (
-    default: #D5D5D5
+    default: #D5D5D5,
+    success: #00B490,
+    error: #F44336
 );
 
 // BORDERS

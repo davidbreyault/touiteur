@@ -7,6 +7,7 @@ import { AuthenticationService } from '../_services/authentication.service';
 import { RegistrationService } from '../_services/registration.service';
 import { User } from '../_models/User.model';
 import { UserRegister } from '../_models/UserRegister.model';
+import { AlertService } from '../_services/alert.service';
 
 @Component({
   selector: 'app-registration',
@@ -18,15 +19,14 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   registrationForm!: FormGroup;
   hidePasswordCharacters: boolean = true;
   hideConfimationCharaters: boolean = true;
-  userRegistrationSuccess!: string | null;
-  userRegistrationError!: string | null;
   subscription!: Subscription;
   customValidators = CustomValidators;
 
   constructor(
     private formBuilder: FormBuilder,
     private authenticationService: AuthenticationService, 
-    private registrationService: RegistrationService, 
+    private registrationService: RegistrationService,
+    private alertService: AlertService,
     private router: Router) { }
 
   ngOnInit(): void {
@@ -59,25 +59,20 @@ export class RegistrationComponent implements OnInit, OnDestroy {
       const { username, password } = this.registrationForm.value;
       user.username = username;
       user.password = password;
-      // Réinitialisation des notifications 
-      this.userRegistrationSuccess = null;
-      this.userRegistrationError = null;
 
       this.subscription = this.registrationService.registrationRequestLauncher(user)
         .subscribe({
           next: (response: UserRegister) => {
             if (response.success) {
-              this.userRegistrationSuccess = "Your account has been created successfully !";
               this.registrationForm.reset();
               // Retire les erreurs sur les champs après soumission et reset
               Object.keys(this.registrationForm.controls).map(field => this.registrationForm.controls[field].setErrors(null));
+              this.alertService.success("Your account has been created successfully !");
             }
           },
           error: response => {
             const { error } = response.error;
-            this.userRegistrationError = error
-              ? error 
-              : "(Error " + response.status + "). An error has occurred !";
+            this.alertService.error(error ? error : "(Error " + response.status + "). An error has occurred !");
           }
         })
     }

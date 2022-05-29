@@ -6,6 +6,7 @@ import { Authentication } from './_models/Authentication.model';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { TouitPublicationComponent } from './touit-publication/touit-publication.component';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
+import { AlertService } from './_services/alert.service';
 
 @Component({
   selector: 'app-root',
@@ -25,6 +26,7 @@ export class AppComponent implements OnInit{
   constructor(
     private authenticationService: AuthenticationService, 
     private tokenService: TokenService, 
+    private alertService: AlertService,
     private router: Router,
     private dialog: MatDialog,
     private breakpointObserver: BreakpointObserver
@@ -77,7 +79,10 @@ export class AppComponent implements OnInit{
       this.isMenuOpen = false;
     }
     dialogRef.afterClosed().subscribe({
-      next: response => console.log(response)
+      next: response => {
+        console.log(response.alertMessage)
+        this.alertService.success(response.alertMessage);
+      }
     })
   }
 

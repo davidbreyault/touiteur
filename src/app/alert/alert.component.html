@@ -1,0 +1,10 @@
+<ng-container *ngIf="alerts" class="test1">
+  <div *ngFor="let alert of alerts" class="test1">
+    <div class="{{ setStyleClasses(alert) }}">
+      <span>{{ alert.message }}</span>
+      <button (click)="removeAlert(alert)">
+        <span class="{{ setStyleButton(alert) }} material-icons">close</span>
+      </button>
+    </div>
+  </div>
+</ng-container>

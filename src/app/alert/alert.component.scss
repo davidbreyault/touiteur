@@ -1,0 +1,38 @@
+@import "../../variables";
+
+.notification {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+  padding: 1rem;
+  width: 100%;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+  &__success {
+    color: map-get($text-colors, success);
+    border-bottom-color: map-get($border-colors, success);
+    background-color: map-get($background-colors, success);
+  }
+  &__error {
+    color: map-get($text-colors, error);
+    border-bottom-color: map-get($border-colors, error);
+    background-color: map-get($background-colors, error);
+  }
+
+  button {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    background-color: transparent;
+    border: none;
+    span.success {
+      color: map-get($text-colors, success);
+    }
+    span.error {
+      color: map-get($text-colors, error);
+    }
+  }
+}

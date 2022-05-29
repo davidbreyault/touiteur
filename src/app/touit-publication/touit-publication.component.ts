@@ -51,7 +51,7 @@ export class TouitPublicationComponent implements OnInit {
       this.touitService.postTouit(touitPost)
         .subscribe({
           next: () => {
-            this.onCloseDialogTouitPost({touitPosted: true, alertMessage: "Votre Touit a été publié avec succès !"})
+            this.onCloseDialogTouitPost({touitPosted: true, alertMessage: "Your Touit has been posted successfully !"})
           }
         });
       // Si erreur de type unauthorized, token périmé, déconnexion et redirection vers /login

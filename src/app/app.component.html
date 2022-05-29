@@ -29,6 +29,7 @@
 
 <main [ngClass]="{'main-login-route': onLoginRoute, 'main-registration-route': onRegistrationRoute}">
   <div class="container">
+    <app-alert *ngIf="authenticationData && authenticationData.isAuthenticated"></app-alert>
     <router-outlet></router-outlet>
   </div>
 </main>

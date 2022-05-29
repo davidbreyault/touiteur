@@ -1,16 +1,8 @@
 <div class="form-container">
-  
-  <ng-container *ngIf="userRegistrationSuccess">
-    <div class="alert alert__success alert__registration">
-      <p>{{ userRegistrationSuccess }}</p>
-      <a routerLink="/login" mat-button color="primary">Se connecter</a>
-    </div>
-  </ng-container>
-  <ng-container *ngIf="userRegistrationError">
-    <div class="alert alert__error alert__registration">
-      <p>{{ userRegistrationError }}</p>
-    </div>
-  </ng-container>
+
+  <div class="alert-container">
+    <app-alert></app-alert>
+  </div>
 
   <form [formGroup]="registrationForm" (ngSubmit)="onRegister()">
     <!-- USERNAME -->
