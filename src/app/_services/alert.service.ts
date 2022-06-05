@@ -6,7 +6,9 @@ import { Alert, AlertType } from "../_models/Alert.model";
 export class AlertService {
 
   private alerts: Alert[] = [];
+  private isPrintedOnAppComponent: boolean = true;
   alertSubject = new Subject<Alert[]>();
+  isPrintedOnAppComponentSubject = new Subject<boolean>();
 
   addAlert(message: string, type: AlertType) {
     const alert = new Alert();
@@ -14,6 +16,7 @@ export class AlertService {
     alert.message = message;
     alert.type = type;
     this.alerts.push(alert);
+    setTimeout(() => this.removeAlert(alert), 4500);
     this.emitAlertSubject();
   }
 
@@ -35,7 +38,16 @@ export class AlertService {
     this.addAlert(message, AlertType.error);
   }
 
+  toggleAppComponentAlertVisibility(): void {
+    this.isPrintedOnAppComponent = !this.isPrintedOnAppComponent;
+    this.emitIsPrintedOnAppComponentSubject();
+  }
+
   emitAlertSubject(): void {
     this.alertSubject.next(this.alerts);
+  }
+
+  emitIsPrintedOnAppComponentSubject(): void {
+    this.isPrintedOnAppComponentSubject.next(this.isPrintedOnAppComponent);
   }
  }

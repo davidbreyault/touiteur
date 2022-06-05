@@ -22,15 +22,19 @@
           Message is <strong>required</strong>
         </mat-error>
         <mat-error *ngIf="touitPostForm.get('message')?.hasError('minlength')">
-          Message must be at least <strong>3</strong> characters long
+          Message <strong>must</strong> be at least <strong>3</strong> characters long
         </mat-error>
         <mat-error *ngIf="touitPostForm.get('message')?.hasError('maxlength')">
-          Message must be less than <strong>256</strong> characters long
+          Message must be less than <strong>must</strong> characters long
         </mat-error>
       </mat-form-field>
+      <app-alert></app-alert>
       <!-- SUBMIT BUTTON -->
       <div class="submit-container">
-        <button mat-raised-button color="primary" [disabled]="!isTouitPostFormValid()">Touit !</button>
+        <button mat-raised-button color="primary" [disabled]="!isTouitPostFormValid()">
+          <span>Touit</span>
+          <span class="material-icons">send</span>
+        </button>
       </div>
     </form>
   </div>

@@ -5,6 +5,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
+import { AlertModule } from "../alert/alert.module";
 import { TouitPublicationComponent } from "./touit-publication.component";
 
 @NgModule({
@@ -17,6 +18,7 @@ import { TouitPublicationComponent } from "./touit-publication.component";
     MatIconModule,
     MatInputModule,
     MatButtonModule,
+    AlertModule
   ]
 })
 export class TouitPublicationModule {}

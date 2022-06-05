@@ -21,7 +21,12 @@
         <li><a href="#">Les meilleurs Touits</a></li>
         <li><a href="#">Influenceurs</a></li>
         <li><a href="#">Tendance</a></li>
-        <li><button mat-raised-button color="primary" (click)="logout()">Déconnexion</button></li>
+        <li>
+          <button mat-raised-button color="primary" (click)="logout()">
+            <span>Déconnexion</span>
+            <span class="material-icons">logout</span>
+          </button>
+        </li>
       </ul>
     </div>
   </div>
@@ -29,7 +34,7 @@
 
 <main [ngClass]="{'main-login-route': onLoginRoute, 'main-registration-route': onRegistrationRoute}">
   <div class="container">
-    <app-alert *ngIf="authenticationData && authenticationData.isAuthenticated"></app-alert>
+    <app-alert *ngIf="authenticationData?.isAuthenticated && isAlertVisible"></app-alert>
     <router-outlet></router-outlet>
   </div>
 </main>
