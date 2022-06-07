@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { User } from '../_models/User.model';
+import { AlertService } from '../_services/alert.service';
 import { AuthenticationService } from '../_services/authentication.service';
 
 @Component({
@@ -14,12 +15,12 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
 
   authenticationForm!: FormGroup;
   hidePasswordCharacters: boolean = true;
-  userAuthenticationError!: string | null;
   subscription!: Subscription;
 
   constructor(
     private router: Router, 
     private formBuilder: FormBuilder, 
+    private alertService: AlertService,
     private authenticationService: AuthenticationService) { }
 
   ngOnInit(): void {
@@ -53,9 +54,7 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
           next: () => this.router.navigateByUrl("/"),
           error: response => {
             const { error } = response.error;
-            this.userAuthenticationError = error
-              ? error 
-              : "(Error " + response.status + "). An error has occurred !";
+            this.alertService.error(error ? error : "(Error " + response.status + "). An error has occurred !");
           }
         })
     }

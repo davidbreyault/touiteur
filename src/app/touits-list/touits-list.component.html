@@ -6,10 +6,6 @@
   </div>
 </ng-container>
 
-<ng-container *ngIf="touitsError">
-  <p class="alert alert__error">{{ touitsError }}</p>
-</ng-container>
-
 <ng-container *ngIf="touitsList">
   <ul class="touits-container">
     <app-touit *ngFor="let t of touitsListSliced" [touit]="t"></app-touit>

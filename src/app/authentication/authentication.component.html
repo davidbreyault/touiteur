@@ -1,10 +1,8 @@
 <div class="form-container">
 
-  <ng-container *ngIf="userAuthenticationError">
-    <div class="alert alert__error alert__authentication">
-      <p>{{ userAuthenticationError }}</p>
-    </div>
-  </ng-container>
+  <div class="alert-container">
+    <app-alert></app-alert>
+  </div>
 
   <form [formGroup]="authenticationForm" (ngSubmit)="onLogin()">
     <!-- USERNAME -->
@@ -38,7 +36,10 @@
     </mat-form-field>
     <!-- SUBMIT BUTTON -->
     <div class="submit-container">
-      <button mat-raised-button color="primary">Connexion</button>
+      <button mat-raised-button color="primary">
+        <span>Connexion</span>
+        <span class="material-icons">login</span>
+      </button>
     </div>
   </form>
 

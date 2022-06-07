@@ -3,8 +3,7 @@ import { TouitsService } from '../_services/touits.service';
 import { Touit } from '../_models/Touit.model';
 import { PageEvent } from '@angular/material/paginator';
 import { interval, Observable, Subscription } from 'rxjs';
-import { MatDialogRef } from '@angular/material/dialog';
-import { TouitPublicationComponent } from '../touit-publication/touit-publication.component';
+import { AlertService } from '../_services/alert.service';
 
 @Component({
   selector: 'app-touits-list',
@@ -16,15 +15,13 @@ export class TouitsListComponent implements OnInit, OnDestroy {
   wheel!: boolean;
   touitsList!: Touit[];
   touitsListSliced!: Touit[];
-  touitsError!: string;
   pageSize: number = 25;
   indexStart: number = 0;
-
 
   subscription!: Subscription;
   refreshInterval: Observable<number> = interval(1000);
 
-  constructor(private touitsService: TouitsService) { }
+  constructor(private touitsService: TouitsService, private alertService: AlertService) { }
 
   ngOnInit(): void {
     this.wheel = true;
@@ -55,9 +52,10 @@ export class TouitsListComponent implements OnInit, OnDestroy {
           this.touitsService.setTs(response.ts);
           this.touitsListSliced = this.touitsList.slice(0, this.pageSize);
         },
-        error: response => {
+        error: () => {
           this.wheel = false;
-          this.touitsError = response.status + " " + response.statusText + ". Une erreur est survenue.";
+          this.subscription.unsubscribe();
+          this.alertService.error("An error occurred, Touits not found !");
         }
       })
   }

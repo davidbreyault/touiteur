@@ -7,11 +7,13 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
+import { AlertModule } from "../alert/alert.module";
 
 @NgModule({
   declarations: [AuthenticationComponent],
   imports: [
     CommonModule,
+    AlertModule,
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,

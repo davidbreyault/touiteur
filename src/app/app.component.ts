@@ -6,6 +6,8 @@ import { Authentication } from './_models/Authentication.model';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { TouitPublicationComponent } from './touit-publication/touit-publication.component';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
+import { AlertService } from './_services/alert.service';
+import { AlertType } from './_models/Alert.model';
 
 @Component({
   selector: 'app-root',
@@ -21,10 +23,12 @@ export class AppComponent implements OnInit{
   onRegistrationRoute!: boolean;
   isMenuOpen: boolean = false;
   dialogWidth!: string;
+  isAlertVisible!: boolean;
   
   constructor(
     private authenticationService: AuthenticationService, 
     private tokenService: TokenService, 
+    private alertService: AlertService,
     private router: Router,
     private dialog: MatDialog,
     private breakpointObserver: BreakpointObserver
@@ -53,6 +57,8 @@ export class AppComponent implements OnInit{
       }
     }
     this.setDialogWidth();
+    this.alertService.isPrintedOnAppComponentSubject
+      .subscribe(boolean => this.isAlertVisible = boolean);
   }
 
   @HostListener("window: resize", ["$event"])
@@ -76,8 +82,21 @@ export class AppComponent implements OnInit{
     if (this.isMenuOpen) {
       this.isMenuOpen = false;
     }
+    // Interdit l'affichage des alertes lorsque la modale est ouverte
+    this.alertService.toggleAppComponentAlertVisibility();
     dialogRef.afterClosed().subscribe({
-      next: response => console.log(response)
+      next: response => {
+        if (response?.alertMessage) {
+          if (response.alertType === AlertType.success) {
+            this.alertService.success(response.alertMessage);
+          }
+          if (response.alertType === AlertType.error) {
+            this.alertService.error(response.alertMessage);
+          }
+        } else {
+          this.alertService.toggleAppComponentAlertVisibility();
+        }
+      }
     })
   }
 
