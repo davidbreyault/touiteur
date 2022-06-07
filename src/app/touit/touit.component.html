@@ -1,9 +1,9 @@
-<li class="touit">
+<li class="touit" [ngClass]="{'popular': touit.likes >= 5}">
   <!-- touit header -->
   <div class="touit__header">
     <h3 class="touit__header--name">
       by <span class="touit__header--name---span">{{ touit.name }}</span>
-      <span *ngIf="touit.is_user_authenticated" class="material-icons">verified</span>
+      <span *ngIf="touit.is_user_authenticated" class="material-icons verified">verified</span>
     </h3>
     <p class="touit__header--ts">{{ touit.ts | date: 'dd/MM/yy - HH:ss' }}</p>
   </div>

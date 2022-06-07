@@ -42,6 +42,10 @@ a, p, div, button[mat-raised-button] {
   @include xl { font-size: 1.6rem; }
 }
 
+button[mat-raised-button] .material-icons {
+  margin-left: 0.5rem;
+}
+
 mat-form-field {
   display: block !important;
   margin-bottom: 0.6rem;

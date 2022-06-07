@@ -16,7 +16,7 @@
         margin: 0 0.3rem;
         font-weight: 400;
       }
-      .material-icons {
+      .verified {
         color: map-get($background-colors, secondary);
       }
     }
@@ -59,7 +59,6 @@
       }
     }
   }
-
   padding: 1rem;
   border-radius: map-get($radius, large);
   background-color: map-get($background-colors, tertiary);
@@ -70,4 +69,25 @@
     max-width: calc($xl - (2 * 1.5rem));
   }
   @include xxl { max-width: calc($xxl - (2 * 1.5rem)); }
+}
+
+.touit.popular {
+  color: map-get($text-colors, white);
+  background-color: darken(map-get($background-colors, secondary), 30%);
+  .touit__header {
+    border-bottom-color: darken(map-get($background-colors, secondary), 25%);
+  }
+  .touit__footer {
+    button {
+      span {
+        color: lighten(map-get($text-colors, gray-1), $amount: 25%);
+        &:hover {
+          color: lighten(map-get($text-colors, gray-1), $amount: 45%);
+        }
+      }
+    }
+  }
+  .verified {
+    color: lighten(map-get($background-colors, secondary), 8%);
+  }
 }
