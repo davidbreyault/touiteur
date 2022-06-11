@@ -23,7 +23,7 @@ export class AppComponent implements OnInit{
   onRegistrationRoute!: boolean;
   isMenuOpen: boolean = false;
   dialogWidth!: string;
-  isAlertVisible!: boolean;
+  isAlertVisible: boolean = true;
   
   constructor(
     private authenticationService: AuthenticationService, 
@@ -41,6 +41,9 @@ export class AppComponent implements OnInit{
           if (value instanceof NavigationEnd) {
             this.onLoginRoute = this.router.url === "/login" ? true : false;
             this.onRegistrationRoute = this.router.url === "/registration" ? true : false;
+            if (this.isMenuOpen) {
+              this.isMenuOpen = !this.isMenuOpen;
+            }
           }
         }
       })
@@ -59,6 +62,7 @@ export class AppComponent implements OnInit{
     this.setDialogWidth();
     this.alertService.isPrintedOnAppComponentSubject
       .subscribe(boolean => this.isAlertVisible = boolean);
+    
   }
 
   @HostListener("window: resize", ["$event"])

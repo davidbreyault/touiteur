@@ -51,7 +51,7 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
       user.password = password;
       this.subscription = this.authenticationService.login(user)
         .subscribe({
-          next: () => this.router.navigateByUrl("/"),
+          next: () => this.router.navigateByUrl("/list"),
           error: response => {
             const { error } = response.error;
             this.alertService.error(error ? error : "(Error " + response.status + "). An error has occurred !");

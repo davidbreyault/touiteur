@@ -58,6 +58,7 @@ export class TouitPublicationComponent implements OnInit {
           next: () => {
             this.alertService.toggleAppComponentAlertVisibility();
             this.onCloseDialogTouitPost({touitPosted: true, alertMessage: "Your Touit has been posted successfully !", alertType: AlertType.success});
+            this.router.navigate(["/login"]);
           },
           error: response => {
             if (response.status === 401 && response.error.msg) {
