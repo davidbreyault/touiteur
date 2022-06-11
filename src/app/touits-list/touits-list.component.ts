@@ -55,7 +55,7 @@ export class TouitsListComponent implements OnInit, OnDestroy {
         error: () => {
           this.wheel = false;
           this.subscription.unsubscribe();
-          this.alertService.error("An error occurred, Touits not found !");
+          this.alertService.error("An error occurred !");
         }
       })
   }
@@ -73,5 +73,6 @@ export class TouitsListComponent implements OnInit, OnDestroy {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
+    this.alertService.clearAlerts();
   }
 }

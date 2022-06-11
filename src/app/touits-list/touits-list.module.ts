@@ -5,6 +5,7 @@ import { TouitsListComponent } from "./touits-list.component";
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator'; 
 import { customPaginatorConfiguration } from "src/shared/custom-paginator-config";
+import { TouitsListRoutingModule } from "./touits-list.routing.module";
 
 @NgModule({
   declarations: [TouitsListComponent],
@@ -13,6 +14,7 @@ import { customPaginatorConfiguration } from "src/shared/custom-paginator-config
     TouitModule,
     MatProgressSpinnerModule,
     MatPaginatorModule,
+    TouitsListRoutingModule
   ],
   providers: [
     { provide: MatPaginatorIntl, useValue: customPaginatorConfiguration() }

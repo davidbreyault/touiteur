@@ -27,6 +27,7 @@ import { MockTouitService } from './_mocks/mock-touit.service';
 import { InterceptorService } from './_services/interceptor.service';
 import { TouitPublicationModule } from './touit-publication/touit-publication.module';
 import { AlertModule } from './alert/alert.module';
+import { TouitsBestofModule } from './touits-bestof/touits-bestof.module';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { AlertModule } from './alert/alert.module';
     RegistrationModule,
     TouitsListModule,
     TouitPublicationModule,
+    TouitsBestofModule,
     // Module global de gestion de route (à importer en dernier !)
     AppRoutingModule
   ],

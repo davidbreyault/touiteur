@@ -1,34 +1,8 @@
-@import "../../variables";
-@import "../../mixins";
-
 .spinner-container {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 3rem;
-}
-
-.touits-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
-  gap: 1.5rem;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  @include sm {
-    grid-template-columns: repeat(auto-fit, minmax(48%, 1fr));
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-  }
-  @include md {
-    grid-template-columns: repeat(auto-fit, minmax(30%, 1fr));
-  }
-  @include xl {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-  }
 }
 
 .alert {
