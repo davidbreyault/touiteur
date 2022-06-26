@@ -1,0 +1,31 @@
+<div class="dialog">
+  <app-touit [touit]="data.touit" [isTouitCommentsChild]="data.isInTouitComments"></app-touit>
+  <div class="comments">
+    <div class="comments__header">
+      <h2>Réagit à ce Touit !</h2>
+      <button class="button-close" (click)="onCloseDialogComments()">
+        <span class="material-icons">close</span>
+      </button>
+    </div>
+    <div class="comment_form">
+      <form *ngIf="commentForm" [formGroup]="commentForm" (ngSubmit)="onSubmitCommentForm()">
+        <!-- COMMENT -->
+        <mat-form-field appearance="fill">
+          <mat-label>Commentaire</mat-label>
+          <textarea matInput formControlName="comment"></textarea>
+        </mat-form-field>
+        <!-- SUBMIT BUTTON -->
+        <div class="submit-container">
+          <button mat-raised-button color="primary">
+            <span>Envoyer</span>
+            <span class="material-icons">send</span>
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="comments-list">
+      <h2>{{ comments!.length > 1 ? "Commentaires (" + comments!.length + ")" : "Commentaire (" + comments!.length + ")" }}</h2>
+      <app-comment *ngFor="let c of comments" [comment]="c" [touit]="data.touit"></app-comment>
+    </div>
+  </div>
+</div>

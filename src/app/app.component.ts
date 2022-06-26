@@ -79,8 +79,7 @@ export class AppComponent implements OnInit{
 
   onOpenDialog(): void {
     const matDialogConfig: MatDialogConfig = {
-      maxWidth: this.dialogWidth,
-      width: this.dialogWidth
+      minWidth: this.dialogWidth
     }
     const dialogRef = this.dialog.open(TouitPublicationComponent, matDialogConfig);
     if (this.isMenuOpen) {

@@ -46,6 +46,18 @@ button[mat-raised-button] .material-icons {
   margin-left: 0.5rem;
 }
 
+.button-close {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  span {
+    color: map-get($text-colors, error);
+  }
+}
+
 mat-form-field {
   display: block !important;
   margin-bottom: 0.6rem;
@@ -75,10 +87,11 @@ mat-form-field {
     @include lg { width: 35%; }
     @include xl { width: 25%; }
   }
-  .submit-container {
-    display: flex;
-    justify-content: flex-end;
-  }
+}
+
+.submit-container {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .mat-error {
@@ -107,6 +120,7 @@ ul.touits-container {
   padding-bottom: 1rem;
   @include sm {
     grid-template-columns: repeat(auto-fit, minmax(48%, 1fr));
+    align-items: center;
     padding-top: 2rem;
     padding-bottom: 2rem;
   }
@@ -120,4 +134,8 @@ ul.touits-container {
     align-items: center;
     gap: 2rem;
   }
+}
+
+.comments-dialog-container .mat-dialog-container {
+  padding: 0;
 }

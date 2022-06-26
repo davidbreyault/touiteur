@@ -1,0 +1,13 @@
+<div class="comment">
+  <div class="comment__header">
+
+    <div class="comment__header--name">
+      <p>by <span class="comment__header--name---span">{{ comment.name }}</span></p>
+      <span *ngIf="touit.is_user_authenticated" class="material-icons verified">verified</span>
+    </div>
+    <p class="comment__header--ts">{{ comment.ts | date: 'dd/MM/yy - HH:ss' }}</p>
+  </div>
+  
+
+  <p class="comment__body">{{ comment.comment }}</p>
+</div>

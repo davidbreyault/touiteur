@@ -1,4 +1,4 @@
-<li class="touit" [ngClass]="{'popular': touit.likes >= 5}">
+<li class="touit" [ngClass]="{'popular': touit.likes >= 5, 'in-touit-comments-dialog': isTouitCommentsChild}">
   <!-- touit header -->
   <div class="touit__header">
     <h3 class="touit__header--name">
@@ -16,9 +16,11 @@
       <button (click)="onLike(touit.id)"><span class="material-icons">thumb_up_alt</span></button>
       <button (click)="onDislike(touit.id)"><span class="material-icons">thumb_down_alt</span></button>
     </div>
-    <div class="touit__footer--comments">
+    <div class="touit__footer--comments" *ngIf="!isTouitCommentsChild">
       <span>{{ touit.comments_count }}</span>
-      <button><span class="material-icons">textsms</span></button>
+      <button (click)="openComments()" (click)="onOpenCommentsDialog()">
+        <span class="material-icons">textsms</span>
+      </button>
     </div>
   </div>
 </li>
