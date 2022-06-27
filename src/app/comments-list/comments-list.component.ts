@@ -53,7 +53,10 @@ export class CommentsListComponent implements OnInit, OnDestroy {
     comment.username = this.authenticationService.getAuthenticationData().username!;
     comment.commentMessage = this.commentForm.value["comment"];
     console.log(comment);
+  }
 
+  isCommentFormValid(): boolean {
+    return this.commentForm?.valid;
   }
 
   ngOnDestroy(): void {
