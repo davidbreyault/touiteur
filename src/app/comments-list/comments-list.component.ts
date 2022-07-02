@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { Comment, CommentsList } from '../_models/Comment';
 import { CommentPost } from '../_models/CommentPost.model';
 import { Touit } from '../_models/Touit.model';
+import { AlertService } from '../_services/alert.service';
 import { AuthenticationService } from '../_services/authentication.service';
 import { CommentsService } from '../_services/comments.service';
 
@@ -24,15 +25,22 @@ export class CommentsListComponent implements OnInit, OnDestroy {
     private commentsDialogRef: MatDialogRef<CommentsListComponent>,
     private formBuilder: FormBuilder,
     private authenticationService: AuthenticationService,
-    private commentsService: CommentsService) { }
+    private commentsService: CommentsService,
+    private alertService: AlertService) { }
 
   ngOnInit(): void {
-    console.log(this.data);
     this.createCommentForm();
+    this.loadTouitComments();
+    this.commentsDialogRef.afterClosed()
+      .subscribe(() => this.alertService.toggleAppComponentAlertVisibility());
+  }
+
+  loadTouitComments(): void {
     this.subscription.add(
       this.commentsService.getTouitComments(this.data.touit.id)
         .subscribe({
-          next: (data: CommentsList) => this.comments = data.comments
+          next: (data: CommentsList) => this.comments = data.comments,
+          error: () => this.alertService.error("Une erreur est survenue. Impossible de charger les commentaires.")
         })
     );
   }
@@ -52,7 +60,18 @@ export class CommentsListComponent implements OnInit, OnDestroy {
     comment.touitId = this.data.touit.id;
     comment.username = this.authenticationService.getAuthenticationData().username!;
     comment.commentMessage = this.commentForm.value["comment"];
-    console.log(comment);
+    if (this.commentForm?.valid) {
+      this.subscription.add(
+        this.commentsService.postTouitComment(comment)
+          .subscribe({
+            next: () => {
+              this.loadTouitComments();
+              this.alertService.success("Votre commentaire a bien été envoyé !");
+            },
+            error: () => this.alertService.error("Une erreur est survenue. Impossible de publier votre commentaire.")
+          })
+      )
+    }
   }
 
   isCommentFormValid(): boolean {

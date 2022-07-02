@@ -3,6 +3,7 @@ import { TouitsService } from '../_services/touits.service';
 import { Touit } from '../_models/Touit.model';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CommentsListComponent } from '../comments-list/comments-list.component';
+import { AlertService } from '../_services/alert.service';
 
 @Component({
   selector: 'app-touit',
@@ -14,7 +15,7 @@ export class TouitComponent {
   @Input() touit!: Touit;
   @Input() isTouitCommentsChild: boolean = false;
 
-  constructor(private touitService: TouitsService, private commentsDialog: MatDialog) { }
+  constructor(private touitService: TouitsService, private commentsDialog: MatDialog, private alertService: AlertService) { }
 
   onLike(id: number): void {
     this.touitService.likeTouit(id).subscribe(() => this.touit.likes++);
@@ -39,7 +40,7 @@ export class TouitComponent {
         isInTouitComments: true
       }
     }
-
     this.commentsDialog.open(CommentsListComponent, matCommentsDialogConfig);
+    this.alertService.toggleAppComponentAlertVisibility();
   }
 }

@@ -34,6 +34,7 @@
     </div>
     <div class="comments-list">
       <h2>{{ comments!.length > 1 ? "Commentaires (" + comments!.length + ")" : "Commentaire (" + comments!.length + ")" }}</h2>
+      <app-alert></app-alert>
       <app-comment *ngFor="let c of comments" [comment]="c" [touit]="data.touit"></app-comment>
     </div>
   </div>
