@@ -91,3 +91,8 @@
     color: lighten(map-get($background-colors, secondary), 8%);
   }
 }
+
+.touit.in-touit-comments-dialog {
+  border-radius: 0;
+  box-shadow: none;
+}

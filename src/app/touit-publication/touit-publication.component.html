@@ -2,7 +2,7 @@
   <!-- touit publication header -->
   <div class="publication__header">
     <h2>Ecris ton Touit !</h2>
-    <button (click)="onCloseDialogTouitPost()">
+    <button class="button-close" (click)="onCloseDialogTouitPost()">
       <span class="material-icons">close</span>
     </button>
   </div>
@@ -25,7 +25,7 @@
           Message <strong>must</strong> be at least <strong>3</strong> characters long
         </mat-error>
         <mat-error *ngIf="touitPostForm.get('message')?.hasError('maxlength')">
-          Message must be less than <strong>must</strong> characters long
+          Message <strong>must</strong> be less than <strong>256</strong> characters long.
         </mat-error>
       </mat-form-field>
       <app-alert></app-alert>

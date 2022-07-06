@@ -13,6 +13,10 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { RegistrationModule } from './registration/registration.module';
 import { TouitsListModule } from './touits-list/touits-list.module';
+import { TouitPublicationModule } from './touit-publication/touit-publication.module';
+import { AlertModule } from './alert/alert.module';
+import { TouitsBestofModule } from './touits-bestof/touits-bestof.module';
+import { CommentsListModule } from './comments-list/comments-list.module';
 // SERVICES 
 import { AuthGuard } from './_services/auth-guard.service';
 import { TokenService } from './_services/token.service';
@@ -25,9 +29,7 @@ import { MockAuthenticationLauncherService } from './_mocks/mock-authentication-
 import { TouitsService } from './_services/touits.service';
 import { MockTouitService } from './_mocks/mock-touit.service';
 import { InterceptorService } from './_services/interceptor.service';
-import { TouitPublicationModule } from './touit-publication/touit-publication.module';
-import { AlertModule } from './alert/alert.module';
-import { TouitsBestofModule } from './touits-bestof/touits-bestof.module';
+import { CommentsService } from './_services/comments.service';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,7 @@ import { TouitsBestofModule } from './touits-bestof/touits-bestof.module';
     TouitsListModule,
     TouitPublicationModule,
     TouitsBestofModule,
+    CommentsListModule,
     // Module global de gestion de route (à importer en dernier !)
     AppRoutingModule
   ],
@@ -60,6 +63,7 @@ import { TouitsBestofModule } from './touits-bestof/touits-bestof.module';
     //{ provide: AuthenticationLauncherService, useClass: MockAuthenticationLauncherService },
     TouitsService,
     //{ provide: TouitsService, useClass: MockTouitService},
+    CommentsService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,

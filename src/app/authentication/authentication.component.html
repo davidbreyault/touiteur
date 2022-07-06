@@ -31,7 +31,7 @@
         Password is <strong>required</strong>
       </mat-error>
       <mat-error *ngIf="authenticationForm.get('password')?.invalid && !authenticationForm.get('password')?.hasError('required')">
-        Password must have at least <strong>8</strong> characters
+        Password must have at least <strong>8</strong> characters.
       </mat-error>
     </mat-form-field>
     <!-- SUBMIT BUTTON -->

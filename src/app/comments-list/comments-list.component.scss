@@ -1,0 +1,13 @@
+@import "../../variables.scss";
+@import "../../mixins.scss";
+
+.comments {
+  padding: 1rem;
+  @include sm {
+    padding: 2rem;
+  }
+}
+
+.comments__list {
+  h2 { margin-bottom: 2rem; }
+}
