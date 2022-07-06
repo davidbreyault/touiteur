@@ -139,3 +139,12 @@ ul.touits-container {
 .comments-dialog-container .mat-dialog-container {
   padding: 0;
 }
+
+.publication, .comments {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 2rem;
+  }
+}

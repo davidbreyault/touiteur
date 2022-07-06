@@ -25,10 +25,6 @@ export class TouitComponent {
     this.touitService.dislikeTouit(id).subscribe(() => this.touit.likes--);
   }
 
-  openComments(): void {
-    console.log("COMMENTS ON TOUIT N°" + this.touit.id);
-  }
-
   onOpenCommentsDialog(): void {
     const matCommentsDialogConfig: MatDialogConfig = {
       width: "800px",

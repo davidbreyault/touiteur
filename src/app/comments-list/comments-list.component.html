@@ -1,5 +1,4 @@
 <div class="dialog">
-  <app-touit [touit]="data.touit" [isTouitCommentsChild]="data.isInTouitComments"></app-touit>
   <div class="comments">
     <div class="comments__header">
       <h2>Réagit à ce Touit !</h2>
@@ -7,6 +6,7 @@
         <span class="material-icons">close</span>
       </button>
     </div>
+    <app-touit [touit]="data.touit" [isTouitCommentsChild]="data.isInTouitComments"></app-touit>
     <div class="comment_form">
       <form *ngIf="commentForm" [formGroup]="commentForm" (ngSubmit)="onSubmitCommentForm()">
         <!-- COMMENT -->
@@ -32,8 +32,8 @@
         </div>
       </form>
     </div>
-    <div class="comments-list">
-      <h2>{{ comments!.length > 1 ? "Commentaires (" + comments!.length + ")" : "Commentaire (" + comments!.length + ")" }}</h2>
+    <div class="comments__list" *ngIf="comments!.length > 1">
+      <h2>{{ "Commentaires (" + comments.length + ")" }}</h2>
       <app-alert></app-alert>
       <app-comment *ngFor="let c of comments" [comment]="c" [touit]="data.touit"></app-comment>
     </div>

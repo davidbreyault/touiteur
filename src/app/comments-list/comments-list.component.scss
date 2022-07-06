@@ -1,16 +1,6 @@
 @import "../../variables.scss";
 @import "../../mixins.scss";
 
-.dialog {
-  position: relative;
-  .button-close {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    @include sm { top: 1.2rem; }
-  }
-}
-
 .comments {
   padding: 1rem;
   @include sm {
@@ -18,6 +8,6 @@
   }
 }
 
-h2 {
-  padding-bottom: 2rem;
+.comments__list {
+  h2 { margin-bottom: 2rem; }
 }
